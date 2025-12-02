@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>NerdParts.no</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>NerdParts.no <a href="{{ url_for('cart') }}" style="float:right">Handlekurv</a></h1>
+  <div class="products">
+    {% for p in products %}
+      <div class="product">
+        {% if p.image %}
+          <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}">
+        {% endif %}
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.description }}</p>
+        <p><b>{{ "%.2f"|format(p.price) }} kr</b></p>
+        <a href="{{ url_for('add_to_cart', id=p.id) }}">Legg til</a>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

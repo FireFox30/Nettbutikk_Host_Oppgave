@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Ordrebekreftelse</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="confirmation-container">
+    <div class="success-message">
+      <h1>✓ Takk for din bestilling!</h1>
+      <p>Din ordre er mottatt og behandles nå.</p>
+    </div>
+    
+    <div class="order-details">
+      <h2>Ordredetaljer</h2>
+      <p><strong>Ordrenummer:</strong> #{{ order.id }}</p>
+      <p><strong>Dato:</strong> {{ order.order_date.strftime('%d.%m.%Y %H:%M') }}</p>
+      <p><strong>Navn:</strong> {{ order.customer_name }}</p>
+      <p><strong>E-post:</strong> {{ order.customer_email }}</p>
+      <p><strong>Adresse:</strong> {{ order.customer_address }}</p>
+    </div>
+    
+    <div class="order-items">
+      <h2>Bestilte produkter</h2>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Produkt</th>
+            <th>Antall</th>
+            <th>Pris</th>
+            <th>Totalt</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in order_items %}
+            <tr>
+              <td>{{ item.product_name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ "%.2f"|format(item.price) }} kr</td>
+              <td>{{ "%.2f"|format(item.price * item.quantity) }} kr</td>
+            </tr>
+          {% endfor %}
+          <tr class="total-row">
+            <td colspan="3"><strong>Total:</strong></td>
+            <td><strong>{{ "%.2f"|format(order.total_price) }} kr</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="confirmation-actions">
+      <a href="{{ url_for('index') }}" class="button button-primary">Tilbake til butikken</a>
+    </div>
+  </div>
+</body>
+</html>

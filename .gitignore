@@ -1,0 +1,20 @@
+# Miljøvariabler - IKKE push til Git!
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Flask
+instance/
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite

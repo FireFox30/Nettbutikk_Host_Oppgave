@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Handlekurv</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Handlekurv</h1>
+  {% if items %}
+    {% for item in items %}
+      <div class="cart-item">
+        <span>{{ item.product.name }} - {{ "%.2f"|format(item.product.price) }} kr</span>
+        <a href="{{ url_for('update', id=item.product.id, action='sub') }}">-</a>
+        <span>{{ item.qty }}</span>
+        <a href="{{ url_for('update', id=item.product.id, action='add') }}">+</a>
+      </div>
+    {% endfor %}
+    <h3>Total: {{ "%.2f"|format(total) }} kr</h3>
+    <a href="{{ url_for('checkout') }}" style="background: #28a745; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px;">Bestill</a>
+  {% else %}
+    <p>Handlekurven er tom</p>
+  {% endif %}
+  <br><br>
+  <a href="{{ url_for('index') }}">Tilbake til butikken</a>
+</body>
+</html>

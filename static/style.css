@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+h1 {
+  background: white;
+  padding: 20px 40px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Produktliste */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: #f8f9fa;
+}
+
+.product h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.3;
+  height: 48px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product p {
+  margin-bottom: 15px;
+  height: 60px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 14px;
+  color: #666;
+}
+
+.product p b {
+  color: #28a745;
+  font-size: 24px;
+  display: block;
+  margin-top: 10px;
+}
+
+/* Knapper og linker */
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.product a, button, h1 a {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+}
+
+.product a {
+  background: #28a745;
+  margin-top: auto;
+}
+
+.product a:hover {
+  background: #218838;
+}
+
+h1 a {
+  background: #007bff;
+  font-size: 16px;
+}
+
+h1 a:hover {
+  background: #0056b3;
+}
+
+button {
+  width: 100%;
+  background: #28a745;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #218838;
+}
+
+/* Handlekurv */
+.cart-item {
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.cart-item a {
+  background: #ffffff;
+  padding: 8px 15px;
+}
+
+.cart-item a:hover {
+  background: #0056b3;
+}
+
+/* Skjema */
+form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 20px 0;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Innhold */
+body > *:not(h1) {
+  padding: 20px 40px;
+}
+
+/* Ordrebekreftelse */
+.confirmation-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.order-details, .order-items {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.summary-table th {
+  background: #f8f9fa;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.summary-table td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.total-row td {
+  font-weight: bold;
+  font-size: 18px;
+  border-top: 2px solid #333;
+}
+
+.button-primary {
+  background: #007bff;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.button-primary:hover {
+  background: #0056b3;
+}
