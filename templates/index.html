@@ -20,5 +20,105 @@
       </div>
     {% endfor %}
   </div>
+
+  <!-- AI Chat Widget -->
+  <div id="chat-button" onclick="toggleChat()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    AI
+  </div>
+
+  <div id="chat-window">
+    <div id="chat-header">
+      <span>🤖 AI Kundeservice</span>
+      <button onclick="toggleChat()">×</button>
+    </div>
+    <div id="chat-messages">
+      <div class="bot-message">Hei! Jeg er AI-assistenten til NerdParts.no. Hvordan kan jeg hjelpe deg i dag?</div>
+    </div>
+    <div id="chat-input-container">
+      <input type="text" id="chat-input" placeholder="Skriv din melding..." onkeypress="handleKeyPress(event)">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const chatWindow = document.getElementById('chat-window');
+      const chatButton = document.getElementById('chat-button');
+      
+      if (chatWindow.style.display === 'flex') {
+        chatWindow.style.display = 'none';
+        chatButton.style.display = 'flex';
+      } else {
+        chatWindow.style.display = 'flex';
+        chatButton.style.display = 'none';
+        document.getElementById('chat-input').focus();
+      }
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Add user message to chat
+      addMessage(message, 'user');
+      input.value = '';
+      
+      // Show typing indicator
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'bot-message typing';
+      typingDiv.textContent = 'Skriver...';
+      typingDiv.id = 'typing-indicator';
+      document.getElementById('chat-messages').appendChild(typingDiv);
+      scrollToBottom();
+      
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: message })
+        });
+        
+        const data = await response.json();
+        
+        // Remove typing indicator
+        document.getElementById('typing-indicator').remove();
+        
+        // Add bot response
+        addMessage(data.response, 'bot');
+        
+      } catch (error) {
+        document.getElementById('typing-indicator').remove();
+        addMessage('Beklager, det oppstod en feil. Prøv igjen senere.', 'bot');
+        console.error('Error:', error);
+      }
+    }
+
+    function addMessage(text, sender) {
+      const messagesDiv = document.getElementById('chat-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+      messageDiv.textContent = text;
+      messagesDiv.appendChild(messageDiv);
+      scrollToBottom();
+    }
+
+    function scrollToBottom() {
+      const messagesDiv = document.getElementById('chat-messages');
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+  </script>
 </body>
 </html>
