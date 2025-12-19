@@ -2,7 +2,7 @@
 
 En komplett nettbutikk for PC-komponenter og gaming-utstyr, bygget med Flask og MySQL.
 
-## 📋 Innholdsfortegnelse
+##  Innholdsfortegnelse
 
 - [Installasjon](#installasjon)
 - [Database-oppsett](#database-oppsett)
@@ -50,7 +50,7 @@ Skriptet oppretter:
   - `order_items` - Produkter i hver ordre
 - **Testdata**: 7 produkter (gaming PC, mus, tastatur, SSD, etc.)
 
-## ▶️ Kjøre applikasjonen
+##  Kjøre applikasjonen
 
 Start Flask-serveren (dette krever en Python-fil som ikke er inkludert, vanligvis `app.py`):
 
